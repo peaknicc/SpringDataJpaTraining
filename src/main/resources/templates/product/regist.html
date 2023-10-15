@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>regist product</title>
+</head>
+<body>
+    <h1>신상품 등록</h1>
+
+    <form action="/product/regist" method="post">
+        <label>상품 이름 : </label><input type="text" name="productName" required><br>
+        <label>상품 정가 : </label><input type="number" name="regularPrice" required><br>
+        <label>할인율 : </label><input type="number" name="discountRate" max="100" placeholder="최대 100까지 가능합니다" required>%<br>
+        <label>카테고리 : </label>
+            <select name="category.categoryCode" id="category.categoryCode">
+            </select><br>
+        <label>브랜드 : </label>
+            <select name="brand.brandCode" id="brand.brandCode">
+            </select><br>
+        <input type="submit" value="메뉴 등록">
+    </form>
+
+    <button onclick="location.href='/'">돌아가기</button>
+
+    <script>
+        fetch('/product/category')
+            .then(res => res.json())
+            .then(data => {
+                const $categoryCode = document.getElementById('category.categoryCode');
+
+                for(let index in data) {
+                    const $option = document.createElement('option');
+                    $option.value = data[index].categoryCode;
+                    $option.textContent = data[index].categoryName;
+
+                    $categoryCode.appendChild($option);
+                }
+            });
+        fetch('/product/brand')
+            .then(res => res.json())
+            .then(data => {
+                const $brandCode = document.getElementById('brand.brandCode');
+
+                for(let index in data) {
+                    const $option = document.createElement('option');
+                    $option.value = data[index].brandCode;
+                    $option.textContent = data[index].brandName;
+
+                    $brandCode.appendChild($option);
+                }
+            });
+    </script>
+</body>
+</html>

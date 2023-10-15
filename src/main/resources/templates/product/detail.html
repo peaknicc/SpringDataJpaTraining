@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>selected menu</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>상품코드</th>
+            <th>상품이름</th>
+            <th>정가</th>
+            <th>할인</th>
+            <th>카테고리</th>
+            <th>브랜드</th>
+            <th>판매금액</th>
+        </tr>
+        <tr th:each="product : ${ product }">
+            <th th:text="${ product.productCode }"></th>
+            <th th:text="${ product.productName }"></th>
+            <th th:text="${ product.regularPrice }"></th>
+            <th th:text="|${ product.discountRate }%|"></th>
+            <th th:text="${ product.category.categoryName }"></th>
+            <th th:text="${ product.brand.brandName }"></th>
+            <td th:text="${ product.salePrice }"></td>
+        </tr>
+    </table>
+
+    <button onclick="location.href='/'">돌아가기</button>
+
+</body>
+</html>

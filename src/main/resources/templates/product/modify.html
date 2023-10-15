@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>modify product</title>
+</head>
+<body>
+    <h1>상품 내용 수정</h1>
+
+    <form action="/product/modify" method="post">
+        <label>수정할 상품 번호 : </label>
+        <input type="number" name="productCode" required><br>
+        <label>수정할 상품 이름 : </label>
+        <input type="text" name="productName" required><br>
+        <label>수정할 상품 정가 : </label>
+        <input type="number" name="regularPrice" required><br>
+        <label>수정할 상품 할인율 : </label>
+        <input type="number" name="discountRate" max="100" placeholder="최대 100까지 가능합니다" required><br>
+        <input type="submit" value="상품 수정">
+    </form>
+
+    <button onclick="location.href='/'">돌아가기</button>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search result</title>
+</head>
+<body>
+    <h1>[[${salePrice}]]원 이하 메뉴 목록</h1>
+    <table>
+        <tr>
+            <th>상품코드</th>
+            <th>상품이름</th>
+            <th>정가</th>
+            <th>할인</th>
+            <th>카테고리</th>
+            <th>브랜드</th>
+            <th>판매금액</th>
+        </tr>
+        <tr th:each="product : ${ productList }">
+            <th th:text="${ product.productCode }"></th>
+            <th th:text="${ product.productName }"></th>
+            <th th:text="${ product.regularPrice }"></th>
+            <th th:text="|${ product.discountRate }%|"></th>
+            <th th:text="${ product.category.categoryName }"></th>
+            <th th:text="${ product.brand.brandName }"></th>
+            <td th:text="${ product.salePrice }"></td>
+        </tr>
+    </table>
+    <div id="paging">
+        <!-- 맨앞 페이지 -->
+        <button th:onclick="'location.href=\'/product/search?page=' + ${ paging.startPage } + '&salePrice=' + ${ salePrice } + '\''"
+                th:disabled="${ productList.first }">
+            &lt;&lt;
+        </button>
+
+        <!-- 이전 페이지 -->
+        <button th:onclick="'location.href=\'/product/search?page=' + ${ paging.currentPage - 1 } + '&salePrice=' + ${ salePrice } + '\''"
+                th:disabled="${ productList.first }">
+            &lt;
+        </button>
+
+        <!-- 숫자 버튼 -->
+        <th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage) }">
+            <button th:onclick="'location.href=\'/product/search?page=' + ${ page } + '&salePrice=' + ${ salePrice } + '\''"
+                    th:text="${ page }"
+                    th:disabled="${ paging.currentPage eq page }">
+
+            </button>
+        </th:block>
+        <!-- 다음 페이지 -->
+        <button th:onclick="'location.href=\'/product/search?page=' + ${ paging.currentPage + 1 } + '&salePrice=' + ${ salePrice } + '\''"
+                th:disabled="${ productList.last }">
+            &gt;
+        </button>
+
+        <!-- 맨뒤 페이지 -->
+        <button th:onclick="'location.href=\'/product/search?page=' + ${ paging.endPage } + '&salePrice=' + ${ salePrice } + '\''"
+                th:disabled="${ productList.last }">
+            &gt;&gt;
+        </button>
+
+    </div>
+
+    <button onclick="location.href='/'">돌아가기</button>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+server:
+  port: 8002
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kybTraining
+    username: ohgiraffers
+    password: ohgiraffers
+
+  jpa:
+    show-sql: true
+    database: mysql
+    generate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+
