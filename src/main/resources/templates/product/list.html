@@ -5,77 +5,77 @@
     <title>Product List</title>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>상품코드</th>
-            <th>상품이름</th>
-            <th>정가</th>
-            <th>할인</th>
-            <th>카테고리</th>
-            <th>브랜드</th>
-            <th>판매금액</th>
-        </tr>
-        <tr th:each="product : ${productList}">
-            <td th:text="${product.productCode}"></td>
-            <td th:text="${product.productName}"></td>
-            <td th:text="${product.regularPrice}"></td>
-            <td th:text="|${product.discountRate}%|"></td>
-            <td th:text="${product.category.categoryName}"></td>
-            <td th:text="${product.brand.brandName}"></td>
-            <td th:text="${product.salePrice}"></td>
-        </tr>
-    </table>
+<table>
+    <tr>
+        <th>상품코드</th>
+        <th>상품이름</th>
+        <th>정가</th>
+        <th>할인</th>
+        <th>카테고리</th>
+        <th>브랜드</th>
+        <th>판매금액</th>
+    </tr>
+    <tr th:each="product : ${productList}">
+        <td th:text="${product.productCode}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.regularPrice}"></td>
+        <td th:text="|${product.discountRate}%|"></td>
+        <td th:text="${product.category.categoryName}"></td>
+        <td th:text="${product.brand.brandName}"></td>
+        <td th:text="${product.salePrice}"></td>
+    </tr>
+</table>
 
-    <div id="paging">
-        <!-- 맨앞 페이지 -->
-        <button th:onclick="'location.href=\'/product/list?page=1&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-                th:disabled="${paging.startPage}">
-            &lt;&lt;
+<div id="paging">
+    <!-- 맨앞 페이지 -->
+    <button th:onclick="'location.href=\'/product/list?page=1&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
+            th:disabled="${paging.currentPage eq 1}">
+        &lt;&lt;
+    </button>
+
+    <!-- 이전 페이지 -->
+    <button th:onclick="'location.href=\'/product/list?page=' + ${paging.currentPage - 1} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
+            th:disabled="${paging.currentPage eq 1}">
+        &lt;
+    </button>
+
+    <!-- 숫자 버튼 -->
+    <th:block th:each="page : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+        <button th:onclick="'location.href=\'/product/list?page=' + ${page} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
+                th:text="${page}"
+                th:disabled="${ paging.currentPage eq page }">
         </button>
+    </th:block>
 
-        <!-- 이전 페이지 -->
-        <button th:onclick="'location.href=\'/product/list?page=' + ${paging.currentPage - 1} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-                th:disabled="${paging.startPage}">
-            &lt;
-        </button>
+    <!-- 다음 페이지 -->
+    <button th:onclick="'location.href=\'/product/list?page=' + ${paging.currentPage + 1} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
+            th:disabled="${paging.currentPage eq paging.totalPage}">
+        &gt;
+    </button>
 
-        <!-- 숫자 버튼 -->
-        <th:block th:each="page : ${#numbers.sequence(paging.startPage, paging.endPage)}">
-            <button th:onclick="'location.href=\'/product/list?page=' + ${page} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-                    th:text="${page}"
-                    th:disabled="${ paging.currentPage eq page }">
-            </button>
-        </th:block>
+    <!-- 맨뒤 페이지 -->
+    <button th:onclick="'location.href=\'/product/list?page=' + ${paging.totalPage} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
+            th:disabled="${paging.currentPage eq paging.totalPage}">
+        &gt;&gt;
+    </button>
+</div>
 
-        <!-- 다음 페이지 -->
-        <button th:onclick="'location.href=\'/product/list?page=' + ${paging.currentPage + 1} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-                th:disabled="${paging.endPage}">
-            &gt;
-        </button>
+<div>
+    <button onclick="location.href='/product/list'">전체</button>
+    <button onclick="location.href='/product/list?brandName=mizuno&categoryName='">Mizuno</button>
+    <button onclick="location.href='/product/list?brandName=asics&categoryName='">Asics</button>
+    <button onclick="location.href='/product/list?brandName=nike&categoryName='">NIKE</button>
+    <button onclick="location.href='/product/list?brandName=adidas&categoryName='">Adidas</button>
+    <button onclick="location.href='/product/list?brandName=obey&categoryName='">OBEY</button><br>
 
-        <!-- 맨뒤 페이지 -->
-        <button th:onclick="'location.href=\'/product/list?page=' + ${paging.endPage} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-                th:disabled="${paging.endPage}">
-            &gt;&gt;
-        </button>
-    </div>
+    <button onclick="location.href='/product/list'">전체</button>
+    <button onclick="location.href='/product/list?brandName=&categoryName=top'">상의</button>
+    <button onclick="location.href='/product/list?brandName=&categoryName=bottom'">하의</button>
+    <button onclick="location.href='/product/list?brandName=&categoryName=shoes'">신발</button>
+    <button onclick="location.href='/product/list?brandName=&categoryName=hat'">모자</button>
+    <button onclick="location.href='/product/list?brandName=&categoryName=bag'">가방</button>
+</div>
 
-    <div>
-        <button onclick="location.href='/product/list'">전체</button>
-        <button onclick="location.href='/product/list?brandName=mizuno&categoryName='">Mizuno</button>
-        <button onclick="location.href='/product/list?brandName=asics&categoryName='">Asics</button>
-        <button onclick="location.href='/product/list?brandName=nike&categoryName='">NIKE</button>
-        <button onclick="location.href='/product/list?brandName=adidas&categoryName='">Adidas</button>
-        <button onclick="location.href='/product/list?brandName=obey&categoryName='">OBEY</button><br>
-
-        <button onclick="location.href='/product/list'">전체</button>
-        <button onclick="location.href='/product/list?brandName=&categoryName=top'">상의</button>
-        <button onclick="location.href='/product/list?brandName=&categoryName=bottom'">하의</button>
-        <button onclick="location.href='/product/list?brandName=&categoryName=shoes'">신발</button>
-        <button onclick="location.href='/product/list?brandName=&categoryName=hat'">모자</button>
-        <button onclick="location.href='/product/list?brandName=&categoryName=bag'">가방</button>
-    </div>
-
-    <button onclick="location.href='/'">돌아가기</button>
+<button onclick="location.href='/'">돌아가기</button>
 </body>
 </html>
