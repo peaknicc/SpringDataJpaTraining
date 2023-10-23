@@ -8,16 +8,29 @@ public class Pagenation {
         int defaultButtonCount = 10;
         int startPage;
         int endPage;
+        int totalPage = page.getTotalPages();
+        System.out.println("전체페이지 : " + page.getTotalPages());
 
         startPage = (int) (Math.ceil((double) currentPage / defaultButtonCount) - 1) * defaultButtonCount + 1;
         endPage = startPage + defaultButtonCount - 1;
 
-        if(page.getTotalPages() < endPage)
+        if(page.getTotalPages() < endPage){
             endPage = page.getTotalPages();
+            System.out.println("(page.getTotalPages() < endPage) 에서 endPage " + endPage);
+            }
 
-        if(page.getTotalPages() == 0 && endPage == 0)
+
+        if(page.getTotalPages() == 0 && endPage == 0){
             endPage = startPage;
+            System.out.println("(page.getTotalPages() == 0 && endPage == 0) 에서 endPage " + endPage);
+        }
 
-        return new PagingButton(currentPage, startPage, endPage);
+        System.out.println("currentPage : " + currentPage);
+        System.out.println("startPage : " + startPage);
+        System.out.println("endPage : " + endPage);
+
+
+
+        return new PagingButton(currentPage, startPage, endPage, totalPage);
     }
 }

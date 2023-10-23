@@ -4,14 +4,24 @@ public class PagingButton {
     private int currentPage;
     private int startPage;
     private int endPage;
+    private int totalPage;
 
     public PagingButton() {
     }
 
-    public PagingButton(int currentPage, int startPage, int endPage) {
+    public PagingButton(int currentPage, int startPage, int endPage, int totalPage) {
         this.currentPage = currentPage;
         this.startPage = startPage;
         this.endPage = endPage;
+        this.totalPage = totalPage;
+    }
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
     }
 
     public int getCurrentPage() {
@@ -44,6 +54,7 @@ public class PagingButton {
                 "currentPage=" + currentPage +
                 ", startPage=" + startPage +
                 ", endPage=" + endPage +
+                ", totalPage=" + totalPage +
                 '}';
     }
 }
