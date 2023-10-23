@@ -29,13 +29,13 @@
 <div id="paging">
     <!-- 맨앞 페이지 -->
     <button th:onclick="'location.href=\'/product/list?page=1&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-            th:disabled="${paging.currentPage eq 1}">
+            th:disabled="${ paging.currentPage eq 1 }">
         &lt;&lt;
     </button>
 
     <!-- 이전 페이지 -->
     <button th:onclick="'location.href=\'/product/list?page=' + ${paging.currentPage - 1} + '&brandName=' + @{${brandName}} + '&categoryName=' + @{${categoryName}} + '\''"
-            th:disabled="${paging.currentPage eq 1}">
+            th:disabled="${ paging.currentPage eq 1 }">
         &lt;
     </button>
 
